@@ -1,3 +1,7 @@
+My custom solution to a question that is asked on Gusto interview
+
+-------
+
 Your goal is to parse a userLog file and do some analysis on it. The userLog file contains all requests to a server within a specific timeframe.
 
 You are given the following method/url definitions:

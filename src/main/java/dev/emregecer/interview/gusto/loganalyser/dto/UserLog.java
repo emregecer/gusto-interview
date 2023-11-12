@@ -1,4 +1,4 @@
-package dev.emregecer.interview.gusto.loganalyser;
+package dev.emregecer.interview.gusto.loganalyser.dto;
 
 import lombok.Builder;
 import lombok.Data;

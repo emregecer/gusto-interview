@@ -1,6 +1,6 @@
 package dev.emregecer.interview.gusto;
 
-import dev.emregecer.interview.gusto.loganalyser.LogAnalysisResult;
+import dev.emregecer.interview.gusto.loganalyser.dto.LogAnalysisResult;
 import dev.emregecer.interview.gusto.loganalyser.UserLogAnalyser;
 
 import java.util.List;

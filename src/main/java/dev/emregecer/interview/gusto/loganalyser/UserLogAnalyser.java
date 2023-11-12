@@ -1,5 +1,10 @@
 package dev.emregecer.interview.gusto.loganalyser;
 
+import dev.emregecer.interview.gusto.loganalyser.dto.LogAnalysis;
+import dev.emregecer.interview.gusto.loganalyser.dto.LogAnalysisResult;
+import dev.emregecer.interview.gusto.loganalyser.dto.UserLog;
+import dev.emregecer.interview.gusto.loganalyser.util.LogUtils;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -53,7 +58,7 @@ public class UserLogAnalyser {
             BufferedReader in = new BufferedReader(new InputStreamReader(logFile.openStream()));
             String inputLine;
             while ((inputLine = in.readLine()) != null) {
-                UserLog userLog = LogLineUtil.parseLogLine(inputLine);
+                UserLog userLog = parseLogLine(inputLine);
                 if (userLog.getPath().contains(URL_PREFIX)) {
                     userLogs.add(userLog);
                 }
@@ -65,5 +70,17 @@ public class UserLogAnalyser {
         }
 
         return userLogs;
+    }
+
+    public static UserLog parseLogLine(String logLine) {
+        return UserLog.builder()
+                .method(LogUtils.extractFieldAsString(logLine, "method"))
+                .path(LogUtils.extractFieldAsString(logLine, "path"))
+                .responseTime(
+                        LogUtils.extractFieldAsMillisecond(logLine, "connect") +
+                                LogUtils.extractFieldAsMillisecond(logLine, "service")
+                )
+                .dyno(LogUtils.extractFieldAsString(logLine, "dyno"))
+                .build();
     }
 }
